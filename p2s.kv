@@ -1,5 +1,17 @@
 BoxLayout:
-    Button:
-        text: "Primer approach"
+    SelectedFiles:
+        id: selectedfiles
+        on_selectedFiles: self._update()
     Files:
         id: chooser
+        on_submit:  selectedfiles.selectedFiles.append(self.selection[0])#; selectedfiles._update()
+
+<SelectedFilesRow>:
+    size_hint_y: None
+    height: 25
+    orientation: "horizontal"
+    Label:
+        text: root.text
+    CheckBox:
+        size_hint_x: None
+        width: 20
