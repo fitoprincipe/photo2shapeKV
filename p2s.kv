@@ -12,6 +12,10 @@ BoxLayout:
     orientation: "horizontal"
     Label:
         text: root.text
-    CheckBox:
+    Button:
+        text: "x"
+        font_color: 1, 1, 1, 1
+        background_color: 0.1, 0.1, 0.1, 1
         size_hint_x: None
         width: 20
+        on_press: print root.parent.selectedFiles.remove(root.text)

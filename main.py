@@ -23,6 +23,10 @@ class Files(FileChooserListView):
 
 
 class SelectedFilesRow(BoxLayout):
+    """ This is the widget for each selected file. It has its path
+    (Label) and a cancell button at its right.
+    """
+    # TODO: wrap the path label
     color = ListProperty([])
     type = StringProperty()
     text = StringProperty()
@@ -39,8 +43,11 @@ class SelectedFiles(BoxLayout):
         self.orientation = "vertical"
 
     def _update(self):
-        lab = SelectedFilesRow(text=self.selectedFiles[-1])
-        self.add_widget(lab)
+        self.clear_widgets()
+        for file in self.selectedFiles:
+            f = file
+            lab = SelectedFilesRow(text=f)
+            self.add_widget(lab)
 
 
 class P2sApp(App):
