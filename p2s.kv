@@ -1,16 +1,22 @@
-BoxLayout:
-    SelectedFiles:
-        id: selectedfiles
-        on_selectedFiles: self._update()
-    Files:
-        id: chooser
-        on_submit:  selectedfiles.selectedFiles.append(self.selection[0])#; selectedfiles._update()
+MainWindow:
+    Menu:
+        id: menu
+        size_hint_y: None
+        height: 50
+    SubWindow:
+        SelectedFiles:
+            id: selectedfiles
+            on_selectedFiles: self._update()
+        Files:
+            id: chooser
+            on_submit:  selectedfiles.selectedFiles.append(self.selection[0])#; selectedfiles._update()
 
 <SelectedFilesRow>:
     size_hint_y: None
     height: 25
     orientation: "horizontal"
     Label:
+        id: path
         text: root.text
     Button:
         text: "x"
@@ -19,3 +25,28 @@ BoxLayout:
         size_hint_x: None
         width: 20
         on_press: print root.parent.selectedFiles.remove(root.text)
+
+<MainWindow>:
+    orientation: "vertical"
+
+<SubWindow>:
+    orientation: "horizontal"
+
+<SelectedFiles>:
+    # orientation: "vertical"
+    cols: 1
+    Label:
+        id: encabezado
+        background_color: 0.2, 0.4, 0.3, 1
+        # color: 0, 0, 0, 1
+        text: "Selected Files"
+        size_hint_y: None
+        height: 25
+
+<Menu>:
+    canvas:
+        Color:
+            rgba: 0.2, 0.2, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos

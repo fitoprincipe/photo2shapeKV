@@ -4,11 +4,25 @@
 from kivy.app import App
 from kivy.uix.filechooser import FileChooserListView
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.label import Label
 from kivy.properties import (ObjectProperty, ListProperty,
                              StringProperty)
+from kivy.uix.gridlayout import GridLayout
 
 import exifread
+import shapefile
+
+
+class Menu(BoxLayout):
+    def __init__(self, **kwargs):
+        super(Menu, self).__init__(**kwargs)
+
+
+class MainWindow(BoxLayout):
+    pass
+
+
+class SubWindow(BoxLayout):
+    pass
 
 
 class Files(FileChooserListView):
@@ -35,12 +49,11 @@ class SelectedFilesRow(BoxLayout):
         super(SelectedFilesRow, self).__init__(**kwargs)
 
 
-class SelectedFiles(BoxLayout):
+class SelectedFiles(GridLayout):
     selectedFiles = ListProperty([])
 
     def __init__(self, **kwargs):
         super(SelectedFiles, self).__init__(**kwargs)
-        self.orientation = "vertical"
 
     def _update(self):
         self.clear_widgets()
@@ -51,6 +64,7 @@ class SelectedFiles(BoxLayout):
 
 
 class P2sApp(App):
+    title = "Photo 2 Shape KV"
     def build(self):
         pass
 
