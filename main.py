@@ -27,7 +27,7 @@ class SubWindow(BoxLayout):
 
 class Files(FileChooserListView):
 
-    selectedFiles = ListProperty([])
+    # selectedFiles = ListProperty([])
 
     def __init__(self, **kwargs):
         super(Files, self).__init__(**kwargs)

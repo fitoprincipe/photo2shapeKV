@@ -4,12 +4,20 @@ MainWindow:
         size_hint_y: None
         height: 50
     SubWindow:
-        SelectedFiles:
-            id: selectedfiles
-            on_selectedFiles: self._update()
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                id: encabezado
+                background_color: 0.2, 0.4, 0.3, 1
+                text: "Selected Files"
+                size_hint_y: None
+                height: 25
+            SelectedFiles:
+                id: selectedfiles
+                on_selectedFiles: self._update()
         Files:
             id: chooser
-            on_submit:  selectedfiles.selectedFiles.append(self.selection[0])#; selectedfiles._update()
+            on_submit:  selectedfiles.selectedFiles.append(self.selection[0])
 
 <SelectedFilesRow>:
     size_hint_y: None
@@ -33,15 +41,7 @@ MainWindow:
     orientation: "horizontal"
 
 <SelectedFiles>:
-    # orientation: "vertical"
     cols: 1
-    Label:
-        id: encabezado
-        background_color: 0.2, 0.4, 0.3, 1
-        # color: 0, 0, 0, 1
-        text: "Selected Files"
-        size_hint_y: None
-        height: 25
 
 <Menu>:
     canvas:
