@@ -1,22 +1,52 @@
-<FilesScreen>:
-    name: 'filescreen'
-    BoxLayout:
-        orientation: 'vertical'
-        Button:
-            font_size: 20
-            size_hint: None, None
-            size: self.texture_size[0]+10, self.texture_size[1]+5
-            text: "back"
-            on_press: root.manager.current = 'appscreen'
+MainWindow:
+    Menu:
+        id: menu
+        size_hint_y: None
+        height: 50
+    SubWindow:
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                id: encabezado
+                background_color: 0.2, 0.4, 0.3, 1
+                text: "Selected Files"
+                size_hint_y: None
+                height: 25
+            SelectedFiles:
+                id: selectedfiles
+                on_selectedFiles: self._update()
         Files:
-            multiselect: True
+            id: chooser
+            on_submit:  selectedfiles.selectedFiles.append(self.selection[0])
 
-<AppScreen>:
-    name: 'appscreen'
+<SelectedFilesRow>:
+    size_hint_y: None
+    height: 25
+    orientation: "horizontal"
+    Label:
+        id: path
+        text: root.text
     Button:
-        text: 'ALGO ACA'
-        on_press: root.manager.current = 'filescreen'
+        text: "x"
+        font_color: 1, 1, 1, 1
+        background_color: 0.1, 0.1, 0.1, 1
+        size_hint_x: None
+        width: 20
+        on_press: print root.parent.selectedFiles.remove(root.text)
 
-<ScreenMan>:
-    FilesScreen
-    AppScreen
+<MainWindow>:
+    orientation: "vertical"
+
+<SubWindow>:
+    orientation: "horizontal"
+
+<SelectedFiles>:
+    cols: 1
+
+<Menu>:
+    canvas:
+        Color:
+            rgba: 0.2, 0.2, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
