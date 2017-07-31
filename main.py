@@ -3,70 +3,36 @@
 
 from kivy.app import App
 from kivy.uix.filechooser import FileChooserListView
-from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import (ObjectProperty, ListProperty,
-                             StringProperty)
-from kivy.uix.gridlayout import GridLayout
+from kivy.properties import ObjectProperty, ListProperty
+from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.garden.filebrowser import FileBrowser
 
 import exifread
-import shapefile
 
 
-class Menu(BoxLayout):
-    def __init__(self, **kwargs):
-        super(Menu, self).__init__(**kwargs)
-
-
-class MainWindow(BoxLayout):
+class FilesScreen(Screen):
     pass
 
 
-class SubWindow(BoxLayout):
+class AppScreen(Screen):
     pass
 
 
-class Files(FileChooserListView):
-
-    # selectedFiles = ListProperty([])
-
+class Files(FileBrowser):
     def __init__(self, **kwargs):
         super(Files, self).__init__(**kwargs)
 
-    def add2list(self, selection, touch):
-        pass
 
-
-class SelectedFilesRow(BoxLayout):
-    """ This is the widget for each selected file. It has its path
-    (Label) and a cancell button at its right.
-    """
-    # TODO: wrap the path label
-    color = ListProperty([])
-    type = StringProperty()
-    text = StringProperty()
-
+class ScreenMan(ScreenManager):
     def __init__(self, **kwargs):
-        super(SelectedFilesRow, self).__init__(**kwargs)
-
-
-class SelectedFiles(GridLayout):
-    selectedFiles = ListProperty([])
-
-    def __init__(self, **kwargs):
-        super(SelectedFiles, self).__init__(**kwargs)
-
-    def _update(self):
-        self.clear_widgets()
-        for file in self.selectedFiles:
-            f = file
-            lab = SelectedFilesRow(text=f)
-            self.add_widget(lab)
+        super(ScreenMan, self).__init__(**kwargs)
+        self.transition = FadeTransition()
 
 
 class P2sApp(App):
-    title = "Photo 2 Shape KV"
     def build(self):
-        pass
+        sm = ScreenMan()
+        return sm
 
     @staticmethod
     def tieneGPS(img):
@@ -81,6 +47,7 @@ class P2sApp(App):
         losTags = exifread.process_file(imagen)
 
         return True if 'GPS GPSLongitude' in losTags.keys() else False
+
 
 if __name__ == "__main__":
     P2sApp().run()
