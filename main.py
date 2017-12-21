@@ -69,12 +69,12 @@ class P2sApp(App):
         pass
 
     @staticmethod
-    def tieneGPS(img):
-        """ metodo para verificar la existencia de datos GPS
+    def has_gps(img):
+        """ verify if image has GPS tags
 
-        :param img: ruta de la imagen a verificar
+        :param img: path to the image
         :type img: str
-        :return: si la imagen tiene datos GPS o no
+        :return: whether it has or not a GPS tag
         :rtype: bool
         """
         imagen = open(img, 'rb')
